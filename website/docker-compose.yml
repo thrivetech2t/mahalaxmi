@@ -3,7 +3,7 @@ services:
   mahalaxmi_web:
     build: .
     ports:
-      - '4025:4025'
+      - '4030:4030'
     env_file:
       - .env.prod
     restart: unless-stopped
