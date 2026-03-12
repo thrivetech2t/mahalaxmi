@@ -47,7 +47,7 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const { tier, billing_cycle, success_url, cancel_url } = body;
+  const { tier, billing_cycle, cloud_provider, success_url, cancel_url } = body;
   if (!tier || !success_url || !cancel_url) {
     return NextResponse.json(
       { error: 'Missing required fields: tier, success_url, cancel_url' },
@@ -56,6 +56,7 @@ export async function POST(request) {
   }
 
   const billingCycle = billing_cycle === 'annual' ? 'annual' : 'monthly';
+  const cloudProvider = cloud_provider || 'hetzner';
 
   const userId = request.headers.get('x-user-id') || '';
   const userEmail = request.headers.get('x-user-email') || '';
@@ -64,12 +65,12 @@ export async function POST(request) {
     const res = await fetch(`${platformUrl}/api/v1/mahalaxmi/checkout/session`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${pakKey}`,
+        'X-Channel-API-Key': pakKey,
         'Content-Type': 'application/json',
         'x-user-id': userId,
         'x-user-email': userEmail,
       },
-      body: JSON.stringify({ tier, billing_cycle: billingCycle, success_url, cancel_url }),
+      body: JSON.stringify({ tier, billing_cycle: billingCycle, cloud_provider: cloudProvider, success_url, cancel_url }),
     });
 
     if (!res.ok) {

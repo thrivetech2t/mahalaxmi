@@ -5,10 +5,12 @@ import { Button, CircularProgress } from '@mui/material';
 import { Cloud } from '@mui/icons-material';
 import { useAuth } from '@/contexts/AuthContext';
 
-export default function BuyNowButton({ tier, billingCycle = 'monthly', label, variant = 'contained' }) {
+const SITE_ORIGIN = 'https://mahalaxmi.ai';
+
+export default function BuyNowButton({ tier, billingCycle = 'monthly', cloudProvider = 'hetzner', label, variant = 'contained' }) {
   const [loading, setLoading] = useState(false);
   const [pendingCheckout, setPendingCheckout] = useState(false);
-  const { isAuthenticated, isLoading: authLoading, token } = useAuth();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
 
   // If auth was still hydrating when the user clicked, proceed once resolved
   useEffect(() => {
@@ -17,32 +19,38 @@ export default function BuyNowButton({ tier, billingCycle = 'monthly', label, va
     if (isAuthenticated) {
       startCheckout();
     } else {
-      redirectToLogin();
+      redirectToRegister();
       setLoading(false);
     }
   }, [pendingCheckout, authLoading, isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function redirectToLogin() {
-    const params = new URLSearchParams({ redirect: '/cloud/pricing', tier, billing_cycle: billingCycle });
-    window.location.href = `/login?${params}`;
+  function redirectToRegister() {
+    window.location.href = `${SITE_ORIGIN}/register?redirect=/cloud/pricing`;
   }
 
   async function startCheckout() {
-    const origin = window.location.origin;
-    const successUrl = `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
-    const cancelUrl = `${origin}/cloud/pricing`;
+    const successUrl = `${SITE_ORIGIN}/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
+    const cancelUrl = `${SITE_ORIGIN}/cloud/pricing`;
 
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({ tier, billing_cycle: billingCycle, success_url: successUrl, cancel_url: cancelUrl }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tier,
+          billing_cycle: billingCycle,
+          cloud_provider: cloudProvider,
+          success_url: successUrl,
+          cancel_url: cancelUrl,
+        }),
       });
 
       const data = await res.json();
+
+      if (res.status === 401) {
+        redirectToRegister();
+        return;
+      }
 
       if (!res.ok || !data.checkout_url) {
         console.error('[BuyNowButton] Checkout error:', data.error);
@@ -70,7 +78,7 @@ export default function BuyNowButton({ tier, billingCycle = 'monthly', label, va
     }
 
     if (!isAuthenticated) {
-      redirectToLogin();
+      redirectToRegister();
       setLoading(false);
       return;
     }
