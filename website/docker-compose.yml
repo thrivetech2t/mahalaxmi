@@ -5,5 +5,5 @@ services:
     ports:
       - '4025:4025'
     env_file:
-      - .env.local
+      - .env.prod
     restart: unless-stopped
