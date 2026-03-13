@@ -15,7 +15,7 @@ export const categoriesAPI = {
 };
 
 export const releasesAPI = {
-  getLatest: () => apiClient.get('/releases/latest'),
+  getLatest: (params = {}) => apiClient.get('/releases/latest', { params }),
 };
 
 export const checkoutAPI = {
