@@ -221,7 +221,7 @@ export default async function MahalaxmiFeaturesPage({ params }) {
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 4, md: 8 } }}>
       <Breadcrumbs separator={<NavigateNext fontSize="small" />} sx={{ mb: 3 }}>
-        <Link href="/mahalaxmi" style={{ textDecoration: 'none', color: 'inherit' }}>Mahalaxmi</Link>
+        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Mahalaxmi</Link>
         <Typography color="text.primary">Features</Typography>
       </Breadcrumbs>
 

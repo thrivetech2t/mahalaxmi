@@ -9,6 +9,11 @@ const PROTECTED_PATTERNS = ['/dashboard', '/account'];
 export default function middleware(request) {
   const { pathname } = request.nextUrl;
 
+  // Never apply locale handling to API routes
+  if (pathname.startsWith('/api/')) {
+    return NextResponse.next();
+  }
+
   // Strip locale prefix to check if route is protected
   const localePattern = /^\/([a-z]{2}-[A-Z]{2})(\/.*)?$/;
   const match = pathname.match(localePattern);
@@ -30,7 +35,7 @@ export default function middleware(request) {
 
 export const config = {
   matcher: [
-    '/((?!_next|_vercel|.*\\..*).*)',
+    '/((?!_next|_vercel|api|.*\\..*).*)',
     '/([\\w-]+)?/dashboard(.*)?',
     '/([\\w-]+)?/account(.*)?',
   ],

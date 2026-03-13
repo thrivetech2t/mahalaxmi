@@ -123,7 +123,7 @@ export default async function MahalaxmiWhitepaperPage({ params }) {
   return (
     <Container maxWidth="md" sx={{ py: { xs: 4, md: 8 } }}>
       <Breadcrumbs separator={<NavigateNext fontSize="small" />} sx={{ mb: 3 }}>
-        <Link href="/mahalaxmi" style={{ textDecoration: 'none', color: 'inherit' }}>Mahalaxmi</Link>
+        <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Mahalaxmi</Link>
         <Typography color="text.primary">Whitepaper</Typography>
       </Breadcrumbs>
 
@@ -271,7 +271,7 @@ export default async function MahalaxmiWhitepaperPage({ params }) {
             <Button component={Link} href="/products/mahalaxmi-ai-terminal-orchestration" variant="contained" startIcon={<Download />}>
               Download Free
             </Button>
-            <Button component={Link} href="/mahalaxmi/features" variant="outlined" endIcon={<ArrowForward />}>
+            <Button component={Link} href="/features" variant="outlined" endIcon={<ArrowForward />}>
               View all features
             </Button>
           </Box>

@@ -119,7 +119,7 @@ export default async function MahalaxmiLandingPage({ params }) {
             </Button>
             <Button
               component={Link}
-              href="/mahalaxmi/whitepaper"
+              href="/whitepaper"
               variant="outlined"
               size="large"
               sx={{ borderColor: 'white', color: 'white', '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' } }}
@@ -232,7 +232,7 @@ export default async function MahalaxmiLandingPage({ params }) {
             ))}
           </Grid>
           <Box sx={{ textAlign: 'center', mt: 4 }}>
-            <Button component={Link} href="/mahalaxmi/features" endIcon={<ArrowForward />} variant="outlined">
+            <Button component={Link} href="/features" endIcon={<ArrowForward />} variant="outlined">
               View all features
             </Button>
           </Box>
@@ -315,7 +315,7 @@ export default async function MahalaxmiLandingPage({ params }) {
             ))}
           </Grid>
           <Box sx={{ textAlign: 'center', mt: 4 }}>
-            <Button component={Link} href="/mahalaxmi/pricing" endIcon={<ArrowForward />} variant="text">
+            <Button component={Link} href="/pricing" endIcon={<ArrowForward />} variant="text">
               See full comparison table
             </Button>
           </Box>
@@ -347,7 +347,7 @@ export default async function MahalaxmiLandingPage({ params }) {
             <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Button
                 component={Link}
-                href="/mahalaxmi/cloud"
+                href="/cloud"
                 variant="contained"
                 size="large"
                 startIcon={<Cloud />}
@@ -356,7 +356,7 @@ export default async function MahalaxmiLandingPage({ params }) {
               </Button>
               <Button
                 component={Link}
-                href="/mahalaxmi/cloud/pricing"
+                href="/cloud/pricing"
                 variant="outlined"
                 size="large"
                 endIcon={<ArrowForward />}
