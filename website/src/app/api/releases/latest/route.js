@@ -22,7 +22,7 @@ export async function GET(request) {
       next: { revalidate: 300 },
     });
 
-    if (res.status === 404) {
+    if (res.status === 404 || res.status === 400) {
       return NextResponse.json({ success: false, available: false }, { status: 200 });
     }
 
