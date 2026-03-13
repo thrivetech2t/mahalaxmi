@@ -43,7 +43,7 @@ export async function fetchProductBySlug(slug) {
   try {
     const res = await fetch(`${platformUrl}/api/v1/public/product`, {
       headers: { 'X-Channel-API-Key': pak },
-      next: { revalidate: 30 },
+      cache: 'no-store',
     });
     if (!res.ok) throw new Error();
     const data = await res.json();
