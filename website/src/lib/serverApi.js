@@ -47,7 +47,7 @@ export async function fetchProductBySlug(slug) {
     });
     if (!res.ok) throw new Error();
     const data = await res.json();
-    return { ...data, slug, ...meta, is_platform_connected: true, data_source: 'platform' };
+    return { ...data.product, slug, ...meta, is_platform_connected: true, data_source: 'platform' };
   } catch {
     return {
       slug,

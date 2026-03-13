@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import {
   Container,
@@ -52,6 +52,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { releasesAPI } from '@/lib/api';
+import CloudProviderTabs from './CloudProviderTabs';
+import ComingSoonTab from './ComingSoonTab';
 
 const ProductDetailContent = ({ product, slug }) => {
   const router = useRouter();
@@ -65,6 +67,8 @@ const ProductDetailContent = ({ product, slug }) => {
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
   const releasesAvailable = releaseData?.data?.success === true;
+
+  const [cloudProvider, setCloudProvider] = useState('hetzner');
 
   const pricingOptions = product.pricing_options || [];
 
@@ -465,6 +469,10 @@ const ProductDetailContent = ({ product, slug }) => {
         <Box id="pricing" sx={{ py: { xs: 8, md: 12 }, bgcolor: 'grey.50' }}>
           <Container maxWidth="lg">
 
+            <CloudProviderTabs onProviderChange={setCloudProvider} />
+
+            {cloudProvider === 'hetzner' ? (
+              <>
             <Grid container spacing={3} justifyContent="center">
               {pricingOptions.map((option, index) => {
                 const { price, period } = formatPrice(option);
@@ -688,6 +696,10 @@ const ProductDetailContent = ({ product, slug }) => {
                   </Table>
                 </TableContainer>
               </Box>
+            )}
+              </>
+            ) : (
+              <ComingSoonTab provider={cloudProvider} />
             )}
           </Container>
         </Box>
