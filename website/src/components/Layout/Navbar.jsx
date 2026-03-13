@@ -44,20 +44,14 @@ export default function Navbar() {
       <Toolbar sx={{ maxWidth: 1200, width: '100%', mx: 'auto', px: { xs: 2, md: 3 } }}>
         {/* Logo */}
         <Box component={Link} href="/" sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none', flexShrink: 0 }}>
-          <Box
-            sx={{
-              width: 36,
-              height: 36,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #00C8C8, #008C8C)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.2rem',
-            }}
-          >
-            🪷
-          </Box>
+          <Image
+            src="/mahalaxmi_logo.png"
+            alt="Mahalaxmi"
+            width={36}
+            height={36}
+            style={{ borderRadius: '50%', objectFit: 'cover' }}
+            priority
+          />
           <Typography
             variant="h6"
             sx={{ color: '#00C8C8', fontWeight: 700, letterSpacing: '-0.02em', fontSize: '1.1rem' }}

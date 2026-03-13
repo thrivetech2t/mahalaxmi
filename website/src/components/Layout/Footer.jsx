@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import MuiLink from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
+import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 
 const footerLinks = [
@@ -26,6 +27,20 @@ export default function Footer() {
       }}
     >
       <Container maxWidth="lg">
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+          <Box component={Link} href="/" sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none' }}>
+            <Image
+              src="/mahalaxmi_logo.png"
+              alt="Mahalaxmi"
+              width={32}
+              height={32}
+              style={{ borderRadius: '50%', objectFit: 'cover' }}
+            />
+            <Typography sx={{ color: '#00C8C8', fontWeight: 700, fontSize: '1rem', letterSpacing: '-0.02em' }}>
+              Mahalaxmi
+            </Typography>
+          </Box>
+        </Box>
         <Box
           sx={{
             display: 'flex',

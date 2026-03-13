@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
       title: t('productsTitle'),
       description: t('productsDescription'),
       url: '/products',
-      images: [{ url: '/thrive-tech-logo-v2.png' }],
+      images: [{ url: '/mahalaxmi_logo.png' }],
       locale: getOpenGraphLocale(locale),
     },
   };
