@@ -47,7 +47,18 @@ export async function fetchProductBySlug(slug) {
     });
     if (!res.ok) throw new Error();
     const data = await res.json();
-    return { ...data.product, slug, ...meta, is_platform_connected: true, data_source: 'platform' };
+    const product = data.product;
+    const pricing_options = (product.pricingTiers || []).map((tier) => ({
+      id: tier.id,
+      name: tier.name,
+      description: tier.description,
+      price: tier.pricing?.primaryPrice ?? tier.pricing?.monthly ?? 0,
+      price_period: 'month',
+      features: tier.features || [],
+      is_popular: !!tier.isPopular,
+      trial_enabled: false,
+    }));
+    return { ...product, pricing_options, slug, ...meta, is_platform_connected: true, data_source: 'platform' };
   } catch {
     return {
       slug,
