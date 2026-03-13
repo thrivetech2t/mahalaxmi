@@ -30,7 +30,7 @@ import {
   CheckCircle,
 } from '@mui/icons-material';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import JsonLd from '@/components/SEO/JsonLd';
 import { breadcrumbSchema } from '@/utils/seoSchemas';
@@ -39,19 +39,16 @@ import LoadingSpinner from '@/components/UI/LoadingSpinner';
 
 const ProductsContent = () => {
   const theme = useTheme();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const selectedCategorySlug = searchParams.get('category');
 
   const handleCategorySelect = (slug) => {
-    const params = new URLSearchParams();
-    params.set('category', slug);
-    window.history.pushState(null, '', `?${params.toString()}`);
-    window.dispatchEvent(new Event('popstate'));
+    router.push(`/products?category=${slug}`, { scroll: false });
   };
 
   const handleBackToCategories = () => {
-    window.history.pushState(null, '', '/products');
-    window.dispatchEvent(new Event('popstate'));
+    router.push('/products', { scroll: false });
   };
 
   const { data: categoriesData, isLoading: categoriesLoading } = useQuery({
