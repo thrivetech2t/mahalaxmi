@@ -17,9 +17,9 @@ export async function GET(request, { params }) {
       `${platformUrl}/api/v1/mahalaxmi/checkout/session/${sessionId}`,
       {
         headers: {
-          'X-Channel-API-Key': pakKey,
+          'Authorization': `Bearer ${pakKey}`,
+          'X-User-Email': userEmail,
           'x-user-id': userId,
-          'x-user-email': userEmail,
         },
         cache: 'no-store',
       }
