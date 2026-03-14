@@ -8,10 +8,19 @@ import { CheckCircleOutline, ErrorOutline } from '@mui/icons-material';
 import { Link } from '@/i18n/navigation';
 import { useSearchParams } from 'next/navigation';
 
+function getAndClearRedirectCookie() {
+  if (typeof document === 'undefined') return '/cloud/pricing';
+  const match = document.cookie.match(/(?:^|; )post_verify_redirect=([^;]*)/);
+  const value = match ? decodeURIComponent(match[1]) : '/cloud/pricing';
+  document.cookie = 'post_verify_redirect=; Max-Age=0; path=/';
+  return value;
+}
+
 export default function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const [status, setStatus] = useState('verifying');
   const [error, setError] = useState('');
+  const [signInUrl, setSignInUrl] = useState('/login');
 
   const token = searchParams.get('token');
 
@@ -27,6 +36,8 @@ export default function VerifyEmailContent() {
         const res = await fetch(`/api/auth/verify-email?token=${encodeURIComponent(token)}`);
         const data = await res.json();
         if (data.success) {
+          const redirectTo = getAndClearRedirectCookie();
+          setSignInUrl(`/login?redirect=${encodeURIComponent(redirectTo)}`);
           setStatus('success');
         } else {
           setStatus('error');
@@ -64,7 +75,7 @@ export default function VerifyEmailContent() {
           <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
             Your email has been verified. You can now sign in to your account.
           </Typography>
-          <Button component={Link} href="/login" variant="contained" size="large" fullWidth>
+          <Button component={Link} href={signInUrl} variant="contained" size="large" fullWidth>
             Sign In
           </Button>
         </Paper>

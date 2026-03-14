@@ -62,6 +62,7 @@ export default function RegisterContent() {
         lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
+        redirectTo: redirectParam || '/cloud/pricing',
       });
 
       if (result.success) {

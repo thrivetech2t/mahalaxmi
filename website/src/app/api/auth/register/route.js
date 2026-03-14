@@ -19,6 +19,7 @@ export async function POST(request) {
     return NextResponse.json(data, { status: backendRes.status });
   }
 
+  const redirectTo = body.redirectTo || '/cloud/pricing';
   const response = NextResponse.json({ success: true, user: data.user, message: data.message });
   if (data.token) {
     response.cookies.set('mahalaxmi_token', data.token, {
@@ -29,5 +30,12 @@ export async function POST(request) {
       path: '/',
     });
   }
+  response.cookies.set('post_verify_redirect', redirectTo, {
+    httpOnly: false,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 60 * 30,
+    path: '/',
+  });
   return response;
 }
