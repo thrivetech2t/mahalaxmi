@@ -10,6 +10,7 @@ members = [
     "crates/mahalaxmi-indexing",
     "crates/mahalaxmi-cli",
     "examples",
+    "integration-tests",
 ]
 
 [workspace.package]
