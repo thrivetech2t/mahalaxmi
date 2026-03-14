@@ -17,6 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import { useAuth } from '@/contexts/AuthContext';
 
 const navLinks = [
   { label: 'Features', href: '/features' },
@@ -30,6 +31,7 @@ export default function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   return (
     <AppBar
@@ -84,33 +86,66 @@ export default function Navbar() {
         {/* CTA buttons */}
         {!isMobile && (
           <Box sx={{ display: 'flex', gap: 1, flexShrink: 0 }}>
-            <Button
-              component={Link}
-              href="/login"
-              variant="outlined"
-              size="small"
-              sx={{
-                borderColor: 'rgba(0,200,200,0.4)',
-                color: '#00C8C8',
-                '&:hover': { borderColor: '#00C8C8', backgroundColor: 'rgba(0,200,200,0.08)' },
-              }}
-            >
-              Login
-            </Button>
-            <Button
-              component={Link}
-              href="/register"
-              variant="contained"
-              size="small"
-              sx={{
-                backgroundColor: '#00C8C8',
-                color: '#000',
-                fontWeight: 700,
-                '&:hover': { backgroundColor: '#00AAAA' },
-              }}
-            >
-              Get Started
-            </Button>
+            {user ? (
+              <>
+                <Button
+                  component={Link}
+                  href="/dashboard/servers"
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    borderColor: 'rgba(0,200,200,0.4)',
+                    color: '#00C8C8',
+                    '&:hover': { borderColor: '#00C8C8', backgroundColor: 'rgba(0,200,200,0.08)' },
+                  }}
+                >
+                  Dashboard
+                </Button>
+                <Button
+                  onClick={logout}
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    backgroundColor: '#00C8C8',
+                    color: '#000',
+                    fontWeight: 700,
+                    '&:hover': { backgroundColor: '#00AAAA' },
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  component={Link}
+                  href="/login"
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    borderColor: 'rgba(0,200,200,0.4)',
+                    color: '#00C8C8',
+                    '&:hover': { borderColor: '#00C8C8', backgroundColor: 'rgba(0,200,200,0.08)' },
+                  }}
+                >
+                  Login
+                </Button>
+                <Button
+                  component={Link}
+                  href="/register"
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    backgroundColor: '#00C8C8',
+                    color: '#000',
+                    fontWeight: 700,
+                    '&:hover': { backgroundColor: '#00AAAA' },
+                  }}
+                >
+                  Get Started
+                </Button>
+              </>
+            )}
           </Box>
         )}
 
@@ -139,12 +174,25 @@ export default function Navbar() {
                     <ListItemText primary={link.label} />
                   </ListItem>
                 ))}
-                <ListItem component={Link} href="/login" onClick={() => setDrawerOpen(false)} sx={{ color: '#00C8C8' }}>
-                  <ListItemText primary="Login" />
-                </ListItem>
-                <ListItem component={Link} href="/register" onClick={() => setDrawerOpen(false)} sx={{ color: '#00C8C8' }}>
-                  <ListItemText primary="Get Started" />
-                </ListItem>
+                {user ? (
+                  <>
+                    <ListItem component={Link} href="/dashboard/servers" onClick={() => setDrawerOpen(false)} sx={{ color: '#00C8C8' }}>
+                      <ListItemText primary="Dashboard" />
+                    </ListItem>
+                    <ListItem onClick={() => { setDrawerOpen(false); logout(); }} sx={{ color: '#00C8C8', cursor: 'pointer' }}>
+                      <ListItemText primary="Logout" />
+                    </ListItem>
+                  </>
+                ) : (
+                  <>
+                    <ListItem component={Link} href="/login" onClick={() => setDrawerOpen(false)} sx={{ color: '#00C8C8' }}>
+                      <ListItemText primary="Login" />
+                    </ListItem>
+                    <ListItem component={Link} href="/register" onClick={() => setDrawerOpen(false)} sx={{ color: '#00C8C8' }}>
+                      <ListItemText primary="Get Started" />
+                    </ListItem>
+                  </>
+                )}
               </List>
             </Drawer>
           </>
