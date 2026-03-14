@@ -103,10 +103,8 @@ export default function MahalaxmiCheckoutSuccessContent() {
 
       if (!isMounted.current) return;
 
-      // 401 — lost auth mid-poll
-      if (res.status === 401) {
-        stopAll();
-        router.replace(`/login?redirect=${encodeURIComponent(`/checkout/success?session_id=${sessionId}`)}`);
+      // 401/403 — platform auth issue, not a user session problem; keep polling
+      if (res.status === 401 || res.status === 403) {
         return;
       }
 
