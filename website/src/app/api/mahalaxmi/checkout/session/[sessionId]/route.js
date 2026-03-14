@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 
 export async function GET(request, { params }) {
   const { sessionId } = await params;
@@ -8,12 +7,6 @@ export async function GET(request, { params }) {
 
   if (!platformUrl || !pakKey) {
     return NextResponse.json({ error: 'Not configured' }, { status: 503 });
-  }
-
-  const cookieStore = await cookies();
-  const token = cookieStore.get('mahalaxmi_token')?.value;
-  if (!token) {
-    return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
   }
 
   const userId = request.headers.get('x-user-id') || '';

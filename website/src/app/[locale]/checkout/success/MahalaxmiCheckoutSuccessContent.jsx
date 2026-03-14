@@ -37,7 +37,8 @@ function ProviderBadge({ provider }) {
 export default function MahalaxmiCheckoutSuccessContent() {
   const searchParams = useSearchParams();
   const router       = useRouter();
-  const sessionId    = searchParams.get('session_id');
+  // Strip anything after a stray '?' — Stripe can produce doubled session_id params
+  const sessionId    = (searchParams.get('session_id') ?? '').split('?')[0] || null;
 
   const { isAuthenticated, isLoading: authLoading, user } = useAuth();
 
