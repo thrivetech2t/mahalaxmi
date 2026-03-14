@@ -143,7 +143,7 @@ export default async function MahalaxmiWhitepaperPage({ params }) {
         </Box>
 
         {/* Abstract */}
-        <Box sx={{ bgcolor: 'grey.50', p: 3, borderRadius: 1, mb: 5 }}>
+        <Box sx={{ bgcolor: 'rgba(0,200,200,0.07)', p: 3, borderRadius: 1, mb: 5 }}>
           <Typography variant="overline" color="text.secondary" sx={{ fontWeight: 700 }}>Abstract</Typography>
           <Typography variant="body1" sx={{ mt: 1 }}>
             Modern software development increasingly relies on AI coding assistants, yet these tools are almost universally designed for one-agent, one-developer interaction. Mahalaxmi Terminal Orchestration breaks this constraint by running dozens of AI coding agents in parallel — each with isolated workspaces, intelligent task assignment, and full PTY-native terminal control — coordinated by a Manager-Worker directed acyclic graph (DAG) architecture. This paper describes the architectural principles, consensus mechanisms, context routing strategies, and enterprise governance features that make large-scale multi-agent development practical on a standard developer workstation.
@@ -158,7 +158,7 @@ export default async function MahalaxmiWhitepaperPage({ params }) {
           <TableContainer component={Paper} elevation={0} variant="outlined">
             <Table size="small">
               <TableHead>
-                <TableRow sx={{ bgcolor: 'grey.100' }}>
+                <TableRow sx={{ bgcolor: 'rgba(255,255,255,0.05)' }}>
                   <TableCell sx={{ fontWeight: 600 }}>Task Type</TableCell>
                   <TableCell align="center" sx={{ fontWeight: 600 }}>Sequential</TableCell>
                   <TableCell align="center" sx={{ fontWeight: 600 }}>Parallel (8 workers)</TableCell>
@@ -203,7 +203,7 @@ export default async function MahalaxmiWhitepaperPage({ params }) {
               <TableContainer component={Paper} elevation={0} variant="outlined" sx={{ mt: 2 }}>
                 <Table size="small">
                   <TableHead>
-                    <TableRow sx={{ bgcolor: 'grey.100' }}>
+                    <TableRow sx={{ bgcolor: 'rgba(255,255,255,0.05)' }}>
                       <TableCell sx={{ fontWeight: 600 }}>Crate</TableCell>
                       <TableCell sx={{ fontWeight: 600 }}>Responsibility</TableCell>
                     </TableRow>
@@ -255,7 +255,7 @@ export default async function MahalaxmiWhitepaperPage({ params }) {
         </Box>
 
         {/* Privacy */}
-        <Box sx={{ bgcolor: 'primary.50', borderLeft: '4px solid', borderColor: 'primary.main', p: 3, borderRadius: '0 8px 8px 0', mb: 5 }}>
+        <Box sx={{ bgcolor: 'rgba(0,200,200,0.07)', borderLeft: '4px solid', borderColor: 'primary.main', p: 3, borderRadius: '0 8px 8px 0', mb: 5 }}>
           <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>Security & Privacy Architecture</Typography>
           <Typography variant="body1">
             All orchestration runs locally on the developer&apos;s machine. AI provider calls go directly from the developer&apos;s machine to the provider&apos;s endpoint — ThriveTech never proxies, relays, or receives AI prompts, completions, or code. License validation transmits only a machine fingerprint and license token.
