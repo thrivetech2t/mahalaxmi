@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 ThriveTech Services LLC
 /**
  * Minimal VS Code API stub for Vite module resolution during tests.
  *

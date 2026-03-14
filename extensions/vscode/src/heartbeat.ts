@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 ThriveTech Services LLC
 /**
  * Minimal interface for a cloud provisioning client that supports sending
  * heartbeat pings. Implemented by the full CloudProvisioningClient in the

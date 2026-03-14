@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 ThriveTech Services LLC
 import * as vscode from 'vscode';
 import type { IMahalaxmiClient, OrchestrationSnapshotDto, WorkerSnapshotDto } from '../client-interface';
 

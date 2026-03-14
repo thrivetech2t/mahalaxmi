@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 ThriveTech Services LLC
 import * as vscode from 'vscode';
 import type { IMahalaxmiClient } from './client-interface';
 import { MahalaxmiClient } from './client';

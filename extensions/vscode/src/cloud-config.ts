@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 ThriveTech Services LLC
 import * as fs from 'fs/promises';
 import * as os from 'os';
 import * as path from 'path';

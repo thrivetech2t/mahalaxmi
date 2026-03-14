@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 ThriveTech Services LLC
 import { EventEmitter } from 'events';
 
 /** Snapshot of a single worker's state. */

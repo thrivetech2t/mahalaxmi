@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright 2026 ThriveTech Services LLC
 const BASE_URL = 'https://tokenapi.thrivetechservice.com';
 const REQUEST_TIMEOUT_MS = 30_000;
 const POLL_INTERVAL_MS = 5_000;
