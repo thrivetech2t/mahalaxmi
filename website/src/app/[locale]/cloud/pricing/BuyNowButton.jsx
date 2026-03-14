@@ -25,7 +25,8 @@ export default function BuyNowButton({ tier, billingCycle = 'monthly', cloudProv
   }, [pendingCheckout, authLoading, isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function redirectToRegister() {
-    window.location.href = `${SITE_ORIGIN}/register?redirect=/cloud/pricing`;
+    const destination = `/cloud/pricing?billing_cycle=${billingCycle}&tier=${tier}`;
+    window.location.href = `${SITE_ORIGIN}/register?redirect=${encodeURIComponent(destination)}`;
   }
 
   async function startCheckout() {
