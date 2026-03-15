@@ -1,37 +1,26 @@
-import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { getUserToken, pakAndJwtHeaders, unauthorizedResponse } from '@/lib/proxyHelpers';
 
 export async function POST(request, { params }) {
+  const token = getUserToken(request);
+  if (!token) return unauthorizedResponse();
   const { id } = await params;
 
-  const cookieStore = await cookies();
-  const token = cookieStore.get('mahalaxmi_token')?.value;
-  if (!token) {
-    return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
-  }
-
-  const platformUrl = process.env.MAHALAXMI_PLATFORM_API_URL;
-  const pakKey = process.env.MAHALAXMI_CLOUD_PAK_KEY;
-
-  if (!platformUrl || !pakKey) {
-    return NextResponse.json({ error: 'Not configured' }, { status: 503 });
-  }
-
-  try {
-    const res = await fetch(`${platformUrl}/api/v1/mahalaxmi/servers/${id}/stop`, {
+  const platformRes = await fetch(
+    `${process.env.MAHALAXMI_PLATFORM_API_URL}/api/v1/mahalaxmi/servers/${id}/stop`,
+    {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!res.ok) {
-      const errorBody = await res.text();
-      console.error(`[servers/${id}/stop] platform error ${res.status}`, errorBody);
-      return NextResponse.json({ error: 'Stop failed' }, { status: res.status });
+      headers: pakAndJwtHeaders(process.env.MAHALAXMI_CLOUD_PAK_KEY, token),
     }
-    return NextResponse.json({}, { status: 202 });
-  } catch {
-    return NextResponse.json({ error: 'Service unreachable' }, { status: 502 });
+  );
+
+  if (!platformRes.ok) {
+    const error = await platformRes.text();
+    console.error(`[stop] platform error ${platformRes.status}`, error);
+    return Response.json(
+      { error: 'stop_failed', detail: error },
+      { status: platformRes.status }
+    );
   }
+
+  return Response.json(await platformRes.json());
 }

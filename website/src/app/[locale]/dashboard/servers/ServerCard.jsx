@@ -241,7 +241,13 @@ export default function ServerCard({ server, onOptimisticUpdate, onRefresh, user
           {/* FQDN */}
           {server.fqdn && (
             <Typography variant="body2" sx={{ fontFamily: 'monospace', mb: 2, color: 'text.secondary', fontSize: '0.78rem' }}>
-              {server.fqdn}
+              {status === 'stopped' ? (
+                <span title="Server stopped — restart to reconnect">{server.fqdn}</span>
+              ) : (
+                <a href={`https://${server.fqdn}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>
+                  {server.fqdn}
+                </a>
+              )}
             </Typography>
           )}
 
@@ -344,6 +350,19 @@ export default function ServerCard({ server, onOptimisticUpdate, onRefresh, user
                 disabled={isBusy}
               >
                 Restart
+              </Button>
+            )}
+
+            {/* Retry — failed only */}
+            {status === 'failed' && (
+              <Button
+                variant="outlined"
+                fullWidth
+                startIcon={actionLoading === 'restart' ? <CircularProgress size={16} color="inherit" /> : <PlayArrow />}
+                onClick={handleRestart}
+                disabled={isBusy}
+              >
+                Retry
               </Button>
             )}
 

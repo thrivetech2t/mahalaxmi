@@ -13,6 +13,14 @@ export function jwtHeaders(token) {
   };
 }
 
+export function pakAndJwtHeaders(pakKey, userToken) {
+  return {
+    'Authorization': `Bearer ${pakKey}`,
+    'X-User-Token': userToken,
+    'Content-Type': 'application/json',
+  };
+}
+
 export function unauthorizedResponse() {
   return Response.json({ error: 'unauthorized' }, { status: 401 });
 }
