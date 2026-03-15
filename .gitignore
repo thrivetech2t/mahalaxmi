@@ -37,3 +37,12 @@ next-env.d.ts
 
 # project config
 website/.mahalaxmi/project.json
+
+# Secrets — plaintext versions never committed
+.env.prod
+*.secret
+secrets/*.plaintext
+secrets/*.decrypted
+
+# SOPS encrypted files ARE committed — these are safe
+# secrets/*.enc — committed to git
