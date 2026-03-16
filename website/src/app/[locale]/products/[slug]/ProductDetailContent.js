@@ -108,7 +108,8 @@ const ProductDetailContent = ({ product, slug, providerLabels = {} }) => {
 
   // Get trial button configuration based on product trial_type
   const getTrialButtonProps = () => {
-    const trialType = product.trial_type || 'contact';
+    // always_downloadable products (native desktop apps) treat the trial as a download
+    const trialType = product.always_downloadable ? 'download' : (product.trial_type || 'contact');
     const buttonText = product.trial_button_text || 'Start Free Trial';
 
     if (trialType === 'download') {

@@ -16,6 +16,15 @@ const DOWNLOAD_CTA_SLUGS = new Set([
   'mahalaxmi-ai-terminal-orchestration-pro',
 ]);
 
+function decodePakChannel(pak) {
+  try {
+    const payload = JSON.parse(Buffer.from(pak.split('.')[1], 'base64url').toString());
+    return payload.channel || null;
+  } catch {
+    return null;
+  }
+}
+
 export async function getProductMetadata(slug) {
   const meta = await getProductMeta();
   return {
@@ -39,6 +48,7 @@ export async function fetchProductBySlug(slug) {
     if (!res.ok) throw new Error();
     const data = await res.json();
     const product = data.product || data;
+    const channel = decodePakChannel(pak);
     const forceDownload = DOWNLOAD_CTA_SLUGS.has(slug);
     const pricing_options = (product.pricingTiers || []).map((tier) => ({
       ...tier,
@@ -56,11 +66,14 @@ export async function fetchProductBySlug(slug) {
       ...product,
       pricing_options,
       slug,
-      image:      product.logo_url ?? '/mahalaxmi_logo.png',
-      is_featured: product.is_featured ?? true,
+      image:         product.logo_url ?? '/mahalaxmi_logo.png',
+      is_featured:   product.is_featured ?? true,
       is_platform_connected: true,
-      data_source: 'platform',
+      data_source:   'platform',
       always_downloadable: DOWNLOAD_CTA_SLUGS.has(slug),
+      // Use channel name from PAK as the product display name
+      name:          channel?.name ?? product.name,
+      channel_name:  channel?.name ?? null,
     };
   } catch {
     return {
