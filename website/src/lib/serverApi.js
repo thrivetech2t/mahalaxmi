@@ -4,10 +4,17 @@
 import { getProductMeta } from '@/lib/productApi';
 
 const PAK_MAP = {
-  'mahalaxmi-ai-terminal-orchestration': process.env.MAHALAXMI_TERMINAL_PAK_KEY,
-  'mahalaxmi-headless-orchestration':    process.env.MAHALAXMI_CLOUD_PAK_KEY,
-  'mahalaxmi-vscode-extension':          process.env.MAHALAXMI_VSCODE_PAK_KEY,
+  'mahalaxmi-ai-terminal-orchestration':     process.env.MAHALAXMI_TERMINAL_PAK_KEY,
+  'mahalaxmi-ai-terminal-orchestration-pro': process.env.MAHALAXMI_DESKTOP_PAK_KEY,
+  'mahalaxmi-headless-orchestration':        process.env.MAHALAXMI_CLOUD_PAK_KEY,
+  'mahalaxmi-vscode-extension':              process.env.MAHALAXMI_VSCODE_PAK_KEY,
 };
+
+// Desktop/terminal products are native apps — all tiers use Download CTA
+const DOWNLOAD_CTA_SLUGS = new Set([
+  'mahalaxmi-ai-terminal-orchestration',
+  'mahalaxmi-ai-terminal-orchestration-pro',
+]);
 
 export async function getProductMetadata(slug) {
   const meta = await getProductMeta();
@@ -32,6 +39,7 @@ export async function fetchProductBySlug(slug) {
     if (!res.ok) throw new Error();
     const data = await res.json();
     const product = data.product;
+    const forceDownload = DOWNLOAD_CTA_SLUGS.has(slug);
     const pricing_options = (product.pricingTiers || []).map((tier) => ({
       ...tier,
       price: tier.pricing?.primaryPrice ?? tier.pricing?.monthly ?? 0,
@@ -42,6 +50,7 @@ export async function fetchProductBySlug(slug) {
       displayAnnualPrice: tier.pricing?.yearly
         ? `${tier.pricing.yearly.toFixed(2)}/yr`
         : null,
+      ...(forceDownload ? { cta_action: 'download' } : {}),
     }));
     return {
       ...product,

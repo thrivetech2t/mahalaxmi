@@ -6,6 +6,11 @@ const PAK_MAP = {
     image: '/mahalaxmi_logo.png',
     is_featured: true,
   },
+  'mahalaxmi-ai-terminal-orchestration-pro': {
+    key: process.env.MAHALAXMI_DESKTOP_PAK_KEY,
+    image: '/mahalaxmi_logo.png',
+    is_featured: true,
+  },
   'mahalaxmi-headless-orchestration': {
     key: process.env.MAHALAXMI_CLOUD_PAK_KEY,
     image: '/mahalaxmi_logo.png',
@@ -19,18 +24,19 @@ const PAK_MAP = {
 };
 
 const CATEGORY_SLUGS = {
-  'cat-terminal':         ['mahalaxmi-ai-terminal-orchestration'],
-  'terminal-orchestration': ['mahalaxmi-ai-terminal-orchestration'],
-  'cat-cloud':            ['mahalaxmi-headless-orchestration'],
-  'cloud-orchestration':  ['mahalaxmi-headless-orchestration'],
-  'cat-vscode':           ['mahalaxmi-vscode-extension'],
-  'vscode-extension':     ['mahalaxmi-vscode-extension'],
+  'cat-terminal':           ['mahalaxmi-ai-terminal-orchestration', 'mahalaxmi-ai-terminal-orchestration-pro'],
+  'terminal-orchestration': ['mahalaxmi-ai-terminal-orchestration', 'mahalaxmi-ai-terminal-orchestration-pro'],
+  'cat-cloud':              ['mahalaxmi-headless-orchestration'],
+  'cloud-orchestration':    ['mahalaxmi-headless-orchestration'],
+  'cat-vscode':             ['mahalaxmi-vscode-extension'],
+  'vscode-extension':       ['mahalaxmi-vscode-extension'],
 };
 
 const PRODUCT_NAMES = {
-  'mahalaxmi-ai-terminal-orchestration': 'Mahalaxmi AI Terminal Orchestration',
-  'mahalaxmi-headless-orchestration': 'Mahalaxmi Headless Orchestration',
-  'mahalaxmi-vscode-extension': 'Mahalaxmi VS Code Extension',
+  'mahalaxmi-ai-terminal-orchestration':     'Mahalaxmi AI Terminal Orchestration',
+  'mahalaxmi-ai-terminal-orchestration-pro': 'Mahalaxmi AI Terminal Orchestration Pro',
+  'mahalaxmi-headless-orchestration':        'Mahalaxmi Headless Orchestration',
+  'mahalaxmi-vscode-extension':              'Mahalaxmi VS Code Extension',
 };
 
 async function fetchPlatformProduct(slug, meta) {
