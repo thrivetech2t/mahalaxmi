@@ -61,6 +61,7 @@ export async function fetchProductBySlug(slug) {
       is_platform_connected: true,
       data_source:   'platform',
       always_downloadable: DOWNLOAD_CTA_SLUGS.has(slug),
+      name: product.channel?.name ?? product.name,
     };
   } catch {
     return {

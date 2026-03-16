@@ -55,6 +55,7 @@ async function fetchPlatformProduct(slug, meta) {
       always_downloadable: meta.always_downloadable ?? false,
       is_platform_connected: true,
       data_source: 'platform',
+      name: product.channel?.name ?? product.name,
     };
   } catch {
     return {
