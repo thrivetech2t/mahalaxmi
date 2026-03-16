@@ -1,13 +1,5 @@
 import { NextResponse } from 'next/server';
 
-function decodePakChannel(pak) {
-  try {
-    const payload = JSON.parse(Buffer.from(pak.split('.')[1], 'base64url').toString());
-    return payload.channel || null;
-  } catch {
-    return null;
-  }
-}
 
 const PAK_MAP = {
   'mahalaxmi-ai-terminal-orchestration': {
@@ -55,31 +47,26 @@ async function fetchPlatformProduct(slug, meta) {
     if (!res.ok) throw new Error('Platform error');
     const data = await res.json();
     const product = data.product || data;
-    const channel = decodePakChannel(meta.key);
     return {
       ...product,
       slug,
-      image:        meta.image,
-      is_featured:  meta.is_featured,
+      image:       meta.image,
+      is_featured: meta.is_featured,
       always_downloadable: meta.always_downloadable ?? false,
       is_platform_connected: true,
-      data_source:  'platform',
-      name:         channel?.name ?? product.name,
-      channel_name: channel?.name ?? null,
+      data_source: 'platform',
     };
   } catch {
-    const channel = decodePakChannel(meta.key);
     return {
       slug,
-      image:        meta.image,
-      is_featured:  meta.is_featured,
+      image:       meta.image,
+      is_featured: meta.is_featured,
       pricing_options: [],
       pricing_type: 'unavailable',
-      name:         channel?.name ?? slug,
-      channel_name: channel?.name ?? null,
+      name:        slug,
       always_downloadable: meta.always_downloadable ?? false,
       is_platform_connected: false,
-      data_source:  'placeholder',
+      data_source: 'placeholder',
       platform_status_message: 'Temporarily unavailable. Contact support@mahalaxmi.ai',
     };
   }

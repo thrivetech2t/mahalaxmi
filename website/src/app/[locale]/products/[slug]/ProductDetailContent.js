@@ -113,13 +113,10 @@ const ProductDetailContent = ({ product, slug, providerLabels = {} }) => {
     const buttonText = product.trial_button_text || 'Start Free Trial';
 
     if (trialType === 'download') {
-      // Always use releasesAPI.getDownloadUrl() which constructs the full URL with API_BASE_URL
-      // This ensures the download link points to the correct backend server
       if (releasesAvailable || product.release_available) {
         return {
-          component: 'a',
-          href: releasesAPI.getDownloadUrl(),
-          download: true,
+          component: Link,
+          href: '/download',
           text: buttonText,
           icon: <Download />,
         };
