@@ -3,22 +3,16 @@ import { NextResponse } from 'next/server';
 const PAK_MAP = {
   'mahalaxmi-ai-terminal-orchestration': {
     key: process.env.MAHALAXMI_TERMINAL_PAK_KEY,
-    category_id: 'cat-terminal',
-    category_name: 'Terminal Orchestration',
     image: '/mahalaxmi_logo.png',
     is_featured: true,
   },
   'mahalaxmi-headless-orchestration': {
     key: process.env.MAHALAXMI_CLOUD_PAK_KEY,
-    category_id: 'cat-cloud',
-    category_name: 'Cloud Orchestration',
     image: '/mahalaxmi_logo.png',
     is_featured: true,
   },
   'mahalaxmi-vscode-extension': {
     key: process.env.MAHALAXMI_VSCODE_PAK_KEY,
-    category_id: 'cat-vscode',
-    category_name: 'VS Code Extension',
     image: '/mahalaxmi_logo.png',
     is_featured: false,
   },
@@ -39,11 +33,12 @@ async function fetchPlatformProduct(slug, meta) {
     });
     if (!res.ok) throw new Error('Platform error');
     const data = await res.json();
-    return { ...data, slug, ...meta, is_platform_connected: true, data_source: 'platform' };
+    return { ...data, slug, image: meta.image, is_featured: meta.is_featured, is_platform_connected: true, data_source: 'platform' };
   } catch {
     return {
       slug,
-      ...meta,
+      image: meta.image,
+      is_featured: meta.is_featured,
       pricing_options: [],
       pricing_type: 'unavailable',
       name: PRODUCT_NAMES[slug] || slug,
@@ -54,19 +49,8 @@ async function fetchPlatformProduct(slug, meta) {
   }
 }
 
-export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const categorySlug = searchParams.get('category');
-
+export async function GET() {
   const slugs = Object.keys(PAK_MAP);
   const products = await Promise.all(slugs.map((slug) => fetchPlatformProduct(slug, PAK_MAP[slug])));
-
-  const filtered = categorySlug
-    ? products.filter((p) => {
-        const meta = PAK_MAP[p.slug];
-        return meta && meta.category_id === categorySlug;
-      })
-    : products;
-
-  return NextResponse.json({ data: { products: filtered } });
+  return NextResponse.json({ data: { products } });
 }

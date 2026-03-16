@@ -191,14 +191,6 @@ const ProductDetailContent = ({ product, slug, providerLabels = {} }) => {
               >
                 Products
               </MuiLink>
-              <MuiLink
-                component={Link}
-                href={`/products?category=${product.category_id?.replace('cat-', '')}`}
-                underline="hover"
-                sx={{ color: 'rgba(255,255,255,0.7)', '&:hover': { color: 'white' } }}
-              >
-                {product.category_name}
-              </MuiLink>
               <Typography sx={{ color: 'white' }}>{product.name}</Typography>
             </Breadcrumbs>
           </Fade>
@@ -220,14 +212,6 @@ const ProductDetailContent = ({ product, slug, providerLabels = {} }) => {
                         }}
                       />
                     )}
-                    <Chip
-                      label={product.category_name}
-                      variant="outlined"
-                      sx={{
-                        borderColor: 'rgba(255,255,255,0.3)',
-                        color: 'white',
-                      }}
-                    />
                   </Box>
 
                   <Typography

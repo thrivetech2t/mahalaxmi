@@ -74,6 +74,7 @@ export async function POST(request) {
         'Authorization': `Bearer ${pakKey}`,
         'Content-Type': 'application/json',
         'X-User-Email': userEmail,
+        'X-User-Token': `Bearer ${token}`,
       },
       body: JSON.stringify({ tier, billing_cycle: billingCycle, email: userEmail, success_url, cancel_url }),
     });

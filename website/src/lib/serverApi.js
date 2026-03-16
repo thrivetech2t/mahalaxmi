@@ -72,9 +72,5 @@ export async function fetchProducts(params = {}) {
   const products = await Promise.all(slugs.map((s) => fetchProductBySlug(s)));
   const valid = products.filter(Boolean);
 
-  if (params.category) {
-    return { data: { products: valid.filter((p) => p.category_name?.toLowerCase().replace(/\s+/g, '-') === params.category) } };
-  }
-
   return { data: { products: valid } };
 }

@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/AuthContext';
 
 const SITE_ORIGIN = 'https://mahalaxmi.ai';
 
-export default function BuyNowButton({ tier, billingCycle = 'monthly', cloudProvider = 'hetzner', label, variant = 'contained' }) {
+export default function BuyNowButton({ tier, billingCycle = 'monthly', label, variant = 'contained' }) {
   const [loading, setLoading] = useState(false);
   const [pendingCheckout, setPendingCheckout] = useState(false);
   const { isAuthenticated, isLoading: authLoading } = useAuth();
@@ -30,7 +30,7 @@ export default function BuyNowButton({ tier, billingCycle = 'monthly', cloudProv
   }
 
   async function startCheckout() {
-    const successUrl = `${SITE_ORIGIN}/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
+    const successUrl = `${SITE_ORIGIN}/checkout/success?session={CHECKOUT_SESSION_ID}`;
     const cancelUrl = `${SITE_ORIGIN}/cloud/pricing`;
 
     try {
@@ -40,7 +40,6 @@ export default function BuyNowButton({ tier, billingCycle = 'monthly', cloudProv
         body: JSON.stringify({
           tier,
           billing_cycle: billingCycle,
-          cloud_provider: cloudProvider,
           success_url: successUrl,
           cancel_url: cancelUrl,
         }),

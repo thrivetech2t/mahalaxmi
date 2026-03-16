@@ -16,8 +16,8 @@ export default function CloudPricingDisplay({ pricingData }) {
   const [isVerified, setIsVerified] = useState(false);
 
   useEffect(() => {
-    const tiers = pricingData?.tiers ?? [];
-    const hasVerificationTier = tiers.some((t) => t.verification_required);
+    const tiers = pricingData?.pricingTiers ?? [];
+    const hasVerificationTier = tiers.some((t) => t.requires_verification);
     if (!hasVerificationTier) return;
     fetch('/api/mahalaxmi/verification/status')
       .then((r) => r.json())
@@ -33,7 +33,7 @@ export default function CloudPricingDisplay({ pricingData }) {
         const billingCycle = billingInterval === 'yearly' ? 'annual' : 'monthly';
         const variant = tier.isRecommended ? 'contained' : 'outlined';
 
-        if (tier.verification_required) {
+        if (tier.requires_verification) {
           if (isVerified) {
             return (
               <BuyNowButton
@@ -46,7 +46,7 @@ export default function CloudPricingDisplay({ pricingData }) {
           }
           return (
             <StudentPricingButton
-              tierId={tier.slug}
+              tierId={tier.id}
               variant={variant}
               onVerified={() => setIsVerified(true)}
             />

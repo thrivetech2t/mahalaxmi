@@ -3,22 +3,16 @@ import { NextResponse } from 'next/server';
 const PAK_MAP = {
   'mahalaxmi-ai-terminal-orchestration': {
     key: process.env.MAHALAXMI_TERMINAL_PAK_KEY,
-    category_id: 'cat-terminal',
-    category_name: 'Terminal Orchestration',
     image: '/mahalaxmi_logo.png',
     is_featured: true,
   },
   'mahalaxmi-headless-orchestration': {
     key: process.env.MAHALAXMI_CLOUD_PAK_KEY,
-    category_id: 'cat-cloud',
-    category_name: 'Cloud Orchestration',
     image: '/mahalaxmi_logo.png',
     is_featured: true,
   },
   'mahalaxmi-vscode-extension': {
     key: process.env.MAHALAXMI_VSCODE_PAK_KEY,
-    category_id: 'cat-vscode',
-    category_name: 'VS Code Extension',
     image: '/mahalaxmi_logo.png',
     is_featured: false,
   },
@@ -48,7 +42,7 @@ export async function GET(request, { params }) {
     const data = await res.json();
     return NextResponse.json({
       success: true,
-      data: { data: { product: { ...data, slug, ...meta, is_platform_connected: true, data_source: 'platform' } } },
+      data: { data: { product: { ...data, slug, image: meta.image, is_featured: meta.is_featured, is_platform_connected: true, data_source: 'platform' } } },
     });
   } catch {
     return NextResponse.json({
@@ -57,7 +51,8 @@ export async function GET(request, { params }) {
         data: {
           product: {
             slug,
-            ...meta,
+            image: meta.image,
+            is_featured: meta.is_featured,
             pricing_options: [],
             pricing_type: 'unavailable',
             name: PRODUCT_NAMES[slug] || slug,

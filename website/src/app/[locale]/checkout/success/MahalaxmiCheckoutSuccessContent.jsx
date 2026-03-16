@@ -34,8 +34,8 @@ function ProviderBadge({ provider, providerLabels }) {
 export default function MahalaxmiCheckoutSuccessContent({ providerLabels = {}, tierLabels = {} }) {
   const searchParams = useSearchParams();
   const router       = useRouter();
-  // Strip anything after a stray '?' — Stripe can produce doubled session_id params
-  const sessionId    = (searchParams.get('session_id') ?? '').split('?')[0] || null;
+  // Strip anything after a stray '?' — Stripe can produce doubled session params
+  const sessionId    = (searchParams.get('session') ?? '').split('?')[0] || null;
 
   const { isAuthenticated, isLoading: authLoading, user } = useAuth();
 
@@ -145,7 +145,7 @@ export default function MahalaxmiCheckoutSuccessContent({ providerLabels = {}, t
 
     if (!isAuthenticated) {
       const dest = sessionId
-        ? `/login?redirect=${encodeURIComponent(`/checkout/success?session_id=${sessionId}`)}`
+        ? `/login?redirect=${encodeURIComponent(`/checkout/success?session=${sessionId}`)}`
         : `/login?redirect=${encodeURIComponent(DASHBOARD_URL)}`;
       router.replace(dest);
       return;

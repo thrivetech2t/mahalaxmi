@@ -51,12 +51,11 @@ export default async function ProductDetailPage({ params }) {
   return (
     <>
       <JsonLd data={productSchema(product)} />
-      {product.category_name !== 'Consulting' && <JsonLd data={softwareApplicationSchema(product)} />}
+      <JsonLd data={softwareApplicationSchema(product)} />
       {product.faqs && product.faqs.length > 0 && <JsonLd data={faqPageSchema(product.faqs)} />}
       <JsonLd data={breadcrumbSchema([
         { name: 'Home', url: '/' },
         { name: 'Products', url: '/products' },
-        { name: product.category_name || 'Category', url: '/products' },
         { name: product.name },
       ])} />
       <ProductDetailContent product={product} slug={slug} providerLabels={providerLabels} />

@@ -71,11 +71,7 @@ export default async function MahalaxmiLandingPage({ params }) {
     getCloudProductOffering(),
   ]);
   if (desktopResult.status === 'fulfilled') {
-    const allTiers = desktopResult.value;
-    tiers = allTiers.filter((t) =>
-      ['free', 'trial', 'pro-desktop', 'professional', 'enterprise'].includes(t.slug)
-    );
-    if (!tiers.length) tiers = allTiers.slice(0, 3); // fallback: first 3 if slugs differ
+    tiers = (desktopResult.value ?? []).filter((t) => !t.is_addon);
   }
   if (cloudResult.status === 'fulfilled') {
     const cloudSolo = (cloudResult.value.pricing_tiers ?? []).find((t) => t.slug === 'cloud-solo');

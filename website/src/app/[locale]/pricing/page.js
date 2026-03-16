@@ -62,6 +62,13 @@ function renderCTA(tier) {
       </Button>
     );
   }
+  if (tier.cta_action === 'verify') {
+    return (
+      <Button component={Link} href="/contact?subject=student-license" variant={variant} fullWidth sx={{ mb: 3 }}>
+        {label}
+      </Button>
+    );
+  }
   // Default — product/checkout
   const href = tier.cta_href ?? tier.ctaHref ?? '/products/mahalaxmi-ai-terminal-orchestration';
   return (
