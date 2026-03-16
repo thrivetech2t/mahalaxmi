@@ -592,7 +592,8 @@ const ProductDetailContent = ({ product, slug, providerLabels = {} }) => {
                           )}
 
                           {(() => {
-                            const ctaAction = option.cta_action ?? option.ctaAction;
+                            // Fallback: free tiers (price 0) default to download if API omits cta_action
+                            const ctaAction = option.cta_action ?? option.ctaAction ?? (option.price === 0 ? 'download' : 'checkout');
                             const ctaLabel  = option.cta_label  ?? option.ctaLabel ?? option.name ?? 'Get started';
                             const variant   = isPopular ? 'contained' : 'outlined';
                             if (ctaAction === 'download') {
