@@ -35,11 +35,17 @@ export async function GET() {
   }
 }
 
+function getPakKeyForTier(tier) {
+  if (!tier) return process.env.MAHALAXMI_CLOUD_PAK_KEY;
+  if (tier.startsWith('cloud-')) return process.env.MAHALAXMI_CLOUD_PAK_KEY;
+  if (tier.startsWith('vscode-')) return process.env.MAHALAXMI_VSCODE_PAK_KEY;
+  return process.env.MAHALAXMI_DESKTOP_PAK_KEY;
+}
+
 export async function POST(request) {
   const platformUrl = process.env.MAHALAXMI_PLATFORM_API_URL;
-  const pakKey = process.env.MAHALAXMI_CLOUD_PAK_KEY;
 
-  if (!platformUrl || !pakKey) {
+  if (!platformUrl) {
     return NextResponse.json({ error: 'Checkout not configured' }, { status: 503 });
   }
 
@@ -62,6 +68,11 @@ export async function POST(request) {
       { error: 'Missing required fields: tier, success_url, cancel_url' },
       { status: 400 }
     );
+  }
+
+  const pakKey = getPakKeyForTier(tier);
+  if (!pakKey) {
+    return NextResponse.json({ error: 'Checkout not configured for this product' }, { status: 503 });
   }
 
   const billingCycle = billing_cycle === 'annual' ? 'annual' : 'monthly';
