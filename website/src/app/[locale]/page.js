@@ -8,7 +8,7 @@ import {
   Groups, ArrowForward, Cloud,
 } from '@mui/icons-material';
 import Link from 'next/link';
-import { getPricingTiers } from '@/lib/productApi';
+import { getPricingTiers, getCloudProductOffering } from '@/lib/productApi';
 
 
 const features = [
@@ -66,20 +66,24 @@ export default async function MahalaxmiLandingPage({ params }) {
 
   let tiers = [];
   let cloudFromPrice = 'Cloud pricing — see pricing page';
-  try {
-    const allTiers = await getPricingTiers();
+  const [desktopResult, cloudResult] = await Promise.allSettled([
+    getPricingTiers(),
+    getCloudProductOffering(),
+  ]);
+  if (desktopResult.status === 'fulfilled') {
+    const allTiers = desktopResult.value;
     tiers = allTiers.filter((t) =>
       ['free', 'trial', 'pro-desktop', 'professional', 'enterprise'].includes(t.slug)
     );
     if (!tiers.length) tiers = allTiers.slice(0, 3); // fallback: first 3 if slugs differ
-    const cloudSolo = allTiers.find((t) => t.slug === 'cloud-solo');
+  }
+  if (cloudResult.status === 'fulfilled') {
+    const cloudSolo = (cloudResult.value.pricing_tiers ?? []).find((t) => t.slug === 'cloud-solo');
     if (cloudSolo?.price_monthly != null) {
       cloudFromPrice = `Cloud pricing — from $${cloudSolo.price_monthly}/mo`;
     } else if (cloudSolo?.price_display) {
       cloudFromPrice = `Cloud pricing — from ${cloudSolo.price_display}`;
     }
-  } catch {
-    // Platform unavailable — page renders without tier section
   }
 
   return (

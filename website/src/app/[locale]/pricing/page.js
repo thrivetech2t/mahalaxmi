@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { ExpandMore, CheckCircle, Remove, NavigateNext } from '@mui/icons-material';
 import Link from 'next/link';
-import { getProductOffering } from '@/lib/productApi';
+import { getDesktopProductOffering } from '@/lib/productApi';
 
 const faqs = [
   {
@@ -77,7 +77,7 @@ export default async function MahalaxmiPricingPage({ params }) {
   let tiers = [];
   let comparisonRows = [];
   try {
-    const offering = await getProductOffering();
+    const offering = await getDesktopProductOffering();
     tiers = offering.pricing_tiers ?? [];
     comparisonRows = offering.comparison_rows ?? [];
   } catch {
