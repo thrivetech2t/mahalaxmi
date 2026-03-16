@@ -16,17 +16,6 @@ const DOWNLOAD_CTA_SLUGS = new Set([
   'mahalaxmi-ai-terminal-orchestration-pro',
 ]);
 
-const PRODUCT_OVERRIDES = {
-  'mahalaxmi-ai-terminal-orchestration': {
-    name: 'Mahalaxmi Terminal — Free',
-    short_description: 'Run up to 2 parallel AI workers locally. No credit card required. Bring your own AI keys.',
-  },
-  'mahalaxmi-ai-terminal-orchestration-pro': {
-    name: 'Mahalaxmi Terminal — Pro',
-    short_description: 'Unlimited parallel AI workers, offline licensing, and priority support. Includes 30-day free trial.',
-  },
-};
-
 export async function getProductMetadata(slug) {
   const meta = await getProductMeta();
   return {
@@ -50,7 +39,6 @@ export async function fetchProductBySlug(slug) {
     if (!res.ok) throw new Error();
     const data = await res.json();
     const product = data.product || data;
-    const overrides = PRODUCT_OVERRIDES[slug] || {};
     const forceDownload = DOWNLOAD_CTA_SLUGS.has(slug);
     const pricing_options = (product.pricingTiers || []).map((tier) => ({
       ...tier,
@@ -66,7 +54,6 @@ export async function fetchProductBySlug(slug) {
     }));
     return {
       ...product,
-      ...overrides,
       pricing_options,
       slug,
       image:      product.logo_url ?? '/mahalaxmi_logo.png',
