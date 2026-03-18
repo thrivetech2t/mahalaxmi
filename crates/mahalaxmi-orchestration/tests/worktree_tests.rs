@@ -534,6 +534,14 @@ fn push_branch_resolves_conflict_with_worker_changes() {
         result
     );
 
+    // The auto-resolved file list must contain README.md.
+    let auto_resolved = result.unwrap();
+    assert!(
+        auto_resolved.contains(&"README.md".to_string()),
+        "push_branch should report README.md as auto-resolved; got {:?}",
+        auto_resolved
+    );
+
     // Verify the worker's version of the file is preserved after the merge.
     let content = std::fs::read_to_string(info.path.join("README.md")).unwrap();
     assert_eq!(

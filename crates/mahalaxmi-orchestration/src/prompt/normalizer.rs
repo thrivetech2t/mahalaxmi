@@ -100,17 +100,17 @@ impl RequirementsNormalizer {
             return raw.to_owned();
         }
 
-        let input = if raw.len() > NORMALIZATION_CHAR_BUDGET {
+        if raw.len() > NORMALIZATION_CHAR_BUDGET {
             tracing::debug!(
                 normalizer = "requirements",
-                original_len = raw.len(),
+                original_chars = raw.len(),
                 budget = NORMALIZATION_CHAR_BUDGET,
-                "Truncating requirements text to normalization budget"
+                "Input exceeds normalization budget — skipping CLI normalization, using original text"
             );
-            &raw[..NORMALIZATION_CHAR_BUDGET]
-        } else {
-            raw
-        };
+            return raw.to_owned();
+        }
+
+        let input = raw;
 
         let prompt = format!("{NORMALIZATION_PROMPT}{input}");
 
@@ -283,22 +283,21 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn normalizer_truncates_input_at_budget() {
-        // Input longer than NORMALIZATION_CHAR_BUDGET must be truncated before sending.
+    async fn normalizer_skips_provider_when_input_exceeds_budget() {
+        // Input longer than NORMALIZATION_CHAR_BUDGET must NOT be sent to the provider —
+        // the original text is returned immediately without any CLI call.
         let long_raw = "x".repeat(NORMALIZATION_CHAR_BUDGET + 5_000);
         let provider = Arc::new(CapturingProvider::new(
             "## Overview\nOK.\n\n## Functional Requirements\n- Yes.",
         ));
         let normalizer = RequirementsNormalizer::new(Arc::clone(&provider) as Arc<dyn NormalizationProvider>);
-        normalizer.normalize(&long_raw).await;
-        let captured = provider.captured().await.unwrap();
-        // The prompt includes the NORMALIZATION_PROMPT prefix; the input portion
-        // must not exceed NORMALIZATION_CHAR_BUDGET characters.
-        let input_portion = captured.strip_prefix(NORMALIZATION_PROMPT).unwrap_or(&captured);
+        let result = normalizer.normalize(&long_raw).await;
+        // Provider must NOT have been called.
         assert!(
-            input_portion.len() <= NORMALIZATION_CHAR_BUDGET,
-            "truncated input must not exceed budget (got {} chars)",
-            input_portion.len()
+            provider.captured().await.is_none(),
+            "provider must not be called when input exceeds budget"
         );
+        // Original text returned unchanged.
+        assert_eq!(result, long_raw, "original text must be returned when input exceeds budget");
     }
 }

@@ -713,15 +713,22 @@ impl WorktreeManager {
     /// stage.
     ///
     /// Used by the `BranchAndPr` strategy.
+    /// Returns a `Vec<String>` of file names where concurrent edits were detected
+    /// and auto-resolved with `-X ours` (this worker's version was kept). An empty
+    /// vec means no concurrent edits were detected. The caller should warn the user
+    /// when the list is non-empty, since earlier workers' edits to those files are
+    /// silently overwritten.
     pub fn push_branch(
         &self,
         worker_id: WorkerId,
         target_branch: Option<&str>,
-    ) -> MahalaxmiResult<()> {
+    ) -> MahalaxmiResult<Vec<String>> {
         let info = self
             .active_worktrees
             .get(&worker_id)
             .ok_or_else(|| MahalaxmiError::orchestration(&self.i18n, "worktree-not-found", &[]))?;
+
+        let mut auto_resolved_files: Vec<String> = vec![];
 
         if let Some(target) = target_branch {
             // Commit any pending (uncommitted) changes in the worktree before
@@ -746,6 +753,45 @@ impl WorktreeManager {
             run_git(&info.path, &["fetch", "origin", target], &self.i18n)?;
             let remote_ref = format!("origin/{}", target);
 
+            // Detect files modified by both this worker and the remote since
+            // their common ancestor.  If any overlap exists and the merge
+            // below auto-resolves with -X ours, those files will silently
+            // favour this worker's version.  We capture the list here so we
+            // can warn the caller after a successful merge.
+            let overlap_files: Vec<String> = {
+                let base = run_git_silent(
+                    &info.path,
+                    &["merge-base", "HEAD", &remote_ref],
+                    &self.i18n,
+                )
+                .unwrap_or_default();
+                let base = base.trim().to_string();
+                if base.is_empty() {
+                    vec![]
+                } else {
+                    let our = run_git_silent(
+                        &info.path,
+                        &["diff", "--name-only", &base, "HEAD"],
+                        &self.i18n,
+                    )
+                    .unwrap_or_default();
+                    let their = run_git_silent(
+                        &info.path,
+                        &["diff", "--name-only", &base, &remote_ref],
+                        &self.i18n,
+                    )
+                    .unwrap_or_default();
+                    let our_set: std::collections::HashSet<&str> =
+                        our.lines().filter(|l| !l.is_empty()).collect();
+                    let their_set: std::collections::HashSet<&str> =
+                        their.lines().filter(|l| !l.is_empty()).collect();
+                    our_set
+                        .intersection(&their_set)
+                        .map(|s| s.to_string())
+                        .collect()
+                }
+            };
+
             // Attempt a no-fast-forward merge first.  Use -X ours so that
             // any file-level conflicts are resolved by keeping the worker's
             // own changes.  Each worker's task scope is authoritative for
@@ -757,6 +803,16 @@ impl WorktreeManager {
                 &["merge", "--no-ff", "--no-edit", "-X", "ours", &remote_ref],
                 &self.i18n,
             );
+
+            if !overlap_files.is_empty() && merge_result.is_ok() {
+                tracing::warn!(
+                    worker_id = %worker_id,
+                    files = ?overlap_files,
+                    "Merge auto-resolved with -X ours — concurrent edits to same \
+                     file(s) detected; earlier worker changes may be overwritten"
+                );
+                auto_resolved_files = overlap_files;
+            }
 
             if let Err(merge_err) = merge_result {
                 // Merge failed (typically a concurrent worker merged conflicting
@@ -838,7 +894,7 @@ impl WorktreeManager {
                 "git: worker branch pushed to remote"
             );
         }
-        Ok(())
+        Ok(auto_resolved_files)
     }
 
     /// Returns `true` if the worktree for `worker_id` has at least one commit
