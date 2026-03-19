@@ -4,7 +4,7 @@
 **Server:** 5.161.189.182
 **Deploy path:** /opt/deployments/mahalaxmi-website
 **Port:** 4025 (behind Nginx)
-**Repo:** https://github.com/thrivetech2t/mahalaxmi-website.git
+**Repo:** https://github.com/mahalaxmi-ai/mahalaxmi.git
 **Integration branch:** integration
 
 ---
@@ -73,7 +73,7 @@ cd /opt/deployments/mahalaxmi-website
 **First deploy (directory is empty):**
 
 ```bash
-git clone https://github.com/thrivetech2t/mahalaxmi-website.git .
+git clone https://github.com/mahalaxmi-ai/mahalaxmi.git .
 git checkout integration
 ```
 

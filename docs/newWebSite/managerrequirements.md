@@ -3,7 +3,7 @@ Manager Requirements Document & Implementation Phases
 
 	
 Document Version	v1.3 — March 2026 (API contracts locked from codebase, billing stub scoped)
-Repository	thrivetech2t/mahalaxmi-website (Private)
+Repository	mahalaxmi-ai/mahalaxmi (Private)
 Domain	mahalaxmi.ai
 Owner	ThriveTech Services LLC
 Integration Branch	integration (set as default in GitHub repo settings)
@@ -82,7 +82,7 @@ NOTE: Stripe hosted checkout — same flow as BuyNowButton: auth-gated, server-s
 •	Files present: .gitignore, CLAUDE.md, README.md (47-byte stub)
 •	No Next.js app, no src/, no package.json
 •	Only main branch — integration branch does not exist yet
-•	GitHub remote connected: origin → https://github.com/thrivetech2t/mahalaxmi-website.git
+•	GitHub remote connected: origin → https://github.com/mahalaxmi-ai/mahalaxmi.git
 
 3.2 Phase 0 Bootstrap — Manual Setup
 ⚠ Do NOT run npx create-next-app. It fails on non-empty directories. Use manual package.json setup.
@@ -499,7 +499,7 @@ All 13 checks must pass before deploying:
 Deploy steps:
 1.	SSH to 5.161.189.182
 2.	mkdir -p /opt/deployments/mahalaxmi-website && cd /opt/deployments/mahalaxmi-website
-3.	git clone https://github.com/thrivetech2t/mahalaxmi-website.git . (first deploy only)
+3.	git clone https://github.com/mahalaxmi-ai/mahalaxmi.git . (first deploy only)
 4.	git pull origin integration
 5.	Copy .env.local with production values
 6.	docker compose up --build -d
@@ -555,12 +555,12 @@ Key Locations
 Item	Location
 Migrate pages from	/home/alex/thrivetech/thrivetechWebsite/frontend/src/app/[locale]/
 New repo root	/home/alex/thrivetech/mahalaxmi-website
-GitHub repo	https://github.com/thrivetech2t/mahalaxmi-website (Private)
+GitHub repo	https://github.com/mahalaxmi-ai/mahalaxmi (Private)
 Production deploy path	/opt/deployments/mahalaxmi-website on 5.161.189.182
 Nginx config	nginx/sites-available/thrivetech-product-platform.conf (in thrivetechWebsite)
 Old shell to decommission	/opt/deployments/thrivetech-website — mahalaxmi-web container
 Platform API base	https://tokenapi.thrivetechservice.com
 Activation API base	https://tokenadmin.thrivetechservice.com
-Open source repo	https://github.com/thrivetech2t/mahalaxmi (Public, MIT)
+Open source repo	https://github.com/mahalaxmi-ai/mahalaxmi (Public, MIT)
 TERMINAL PAK key source	thrivetech/thrivetechWebsite/backend/.env — PRODUCT_PLATFORM_PAK_KEYS
 
