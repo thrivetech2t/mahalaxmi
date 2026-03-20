@@ -47,4 +47,4 @@ This Code of Conduct is adapted from the
 version 2.1.
 
 ---
-*ThriveTech Services LLC — Mahalaxmi™*
+*Mahalaxmi™ is a trademark of ThriveTech Services LLC*
