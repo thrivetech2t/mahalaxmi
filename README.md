@@ -11,6 +11,17 @@ No chaos. No merge hell. Just parallel speed with a human-in-the-loop safety net
 [![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
 [![Build](https://github.com/mahalaxmi-ai/mahalaxmi/actions/workflows/ci.yml/badge.svg)](https://github.com/mahalaxmi-ai/mahalaxmi/actions)
 [![Discord](https://img.shields.io/discord/bSkzhTPK?label=Discord&color=5865F2)](https://discord.gg/bSkzhTPK)
+[![Spec: Peer Review](https://img.shields.io/badge/MFOP%20Spec-Peer%20Review%20Open-yellow)](specs/README.md)
+
+> [!IMPORTANT]
+> **The MFOP v1.0 Protocol Specification is open for public peer review.**
+> Read it in your language and leave feedback via a GitHub issue — your input directly shapes the protocol.
+>
+> | 🇺🇸 [English](specs/en-US/mfop-protocol.md) | 🇪🇸 [Español](specs/es-ES/mfop-protocol.md) | 🇫🇷 [Français](specs/fr-FR/mfop-protocol.md) | 🇩🇪 [Deutsch](specs/de-DE/mfop-protocol.md) | 🇮🇳 [हिन्दी](specs/hi-IN/mfop-protocol.md) |
+> |---|---|---|---|---|
+> | 🇯🇵 [日本語](specs/ja-JP/mfop-protocol.md) | 🇰🇷 [한국어](specs/ko-KR/mfop-protocol.md) | 🇧🇷 [Português](specs/pt-BR/mfop-protocol.md) | 🇨🇳 [中文](specs/zh-CN/mfop-protocol.md) | 🇸🇦 [العربية](specs/ar-SA/mfop-protocol.md) |
+>
+> → [**Submit feedback via GitHub Issues**](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback) · [Full spec index with status](specs/README.md)
 
 ![Mahalaxmi Dashboard](docs/assets/demo.gif)
 <!-- TODO: replace with actual demo GIF before launch -->
@@ -177,28 +188,28 @@ for a complete real-world implementation.
 Other contributions (detection rules, language parsers, bug fixes, docs) are also welcome.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full scope.
 
-## Protocol Specification
+## Protocol Specification — Open for Peer Review
 
-The **Mahalaxmi Federation and Orchestration Protocol (MFOP)** specification is published here for public peer review.
+The **Mahalaxmi Federation and Orchestration Protocol (MFOP) v1.0** specification is published here for public peer review.
 
-MFOP defines how Mahalaxmi nodes federate, route jobs, sign billing receipts, and settle economically across heterogeneous compute infrastructure.
+MFOP defines how Mahalaxmi nodes federate, route jobs, sign billing receipts, and settle economically across heterogeneous compute infrastructure. The spec is in **draft status** — all feedback is welcome: technical corrections, translation accuracy, clarity improvements, or protocol design questions.
 
-The specification is available in 10 languages:
+**How to comment:** Open a [Specification Feedback issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback). The issue form guides you to reference the section number and language. You can also comment directly on the spec `.md` files via a pull request, or start a thread in [GitHub Discussions](https://github.com/mahalaxmi-ai/mahalaxmi/discussions).
 
-| Language | Document | Feedback |
+| Language | Read the Spec | Leave Feedback |
 |---|---|---|
-| English | [MFOP Protocol v1.0](specs/en-US/mfop-protocol.md) | [Open an issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-en-US) |
-| Español | [Protocolo MFOP v1.0](specs/es-ES/mfop-protocol.md) | [Abrir un problema](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-es-ES) |
-| Français | [Protocole MFOP v1.0](specs/fr-FR/mfop-protocol.md) | [Ouvrir un ticket](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-fr-FR) |
-| Deutsch | [MFOP-Protokoll v1.0](specs/de-DE/mfop-protocol.md) | [Issue erstellen](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-de-DE) |
-| हिन्दी | [MFOP प्रोटोकॉल v1.0](specs/hi-IN/mfop-protocol.md) | [समस्या खोलें](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-hi-IN) |
-| 日本語 | [MFOP プロトコル v1.0](specs/ja-JP/mfop-protocol.md) | [Issue を開く](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-ja-JP) |
-| 한국어 | [MFOP 프로토콜 v1.0](specs/ko-KR/mfop-protocol.md) | [이슈 열기](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-ko-KR) |
-| Português | [Protocolo MFOP v1.0](specs/pt-BR/mfop-protocol.md) | [Abrir uma issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-pt-BR) |
-| 中文 | [MFOP 协议 v1.0](specs/zh-CN/mfop-protocol.md) | [提交 Issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-zh-CN) |
-| العربية | [بروتوكول MFOP v1.0](specs/ar-SA/mfop-protocol.md) | [فتح مشكلة](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-ar-SA) |
+| 🇺🇸 English (en-US) | [MFOP Protocol v1.0](specs/en-US/mfop-protocol.md) | [Open an issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-en-US) |
+| 🇪🇸 Español (es-ES) | [Protocolo MFOP v1.0](specs/es-ES/mfop-protocol.md) | [Abrir un problema](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-es-ES) |
+| 🇫🇷 Français (fr-FR) | [Protocole MFOP v1.0](specs/fr-FR/mfop-protocol.md) | [Ouvrir un ticket](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-fr-FR) |
+| 🇩🇪 Deutsch (de-DE) | [MFOP-Protokoll v1.0](specs/de-DE/mfop-protocol.md) | [Issue erstellen](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-de-DE) |
+| 🇮🇳 हिन्दी (hi-IN) | [MFOP प्रोटोकॉल v1.0](specs/hi-IN/mfop-protocol.md) | [समस्या खोलें](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-hi-IN) |
+| 🇯🇵 日本語 (ja-JP) | [MFOP プロトコル v1.0](specs/ja-JP/mfop-protocol.md) | [Issue を開く](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-ja-JP) |
+| 🇰🇷 한국어 (ko-KR) | [MFOP 프로토콜 v1.0](specs/ko-KR/mfop-protocol.md) | [이슈 열기](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-ko-KR) |
+| 🇧🇷 Português (pt-BR) | [Protocolo MFOP v1.0](specs/pt-BR/mfop-protocol.md) | [Abrir uma issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-pt-BR) |
+| 🇨🇳 中文 (zh-CN) | [MFOP 协议 v1.0](specs/zh-CN/mfop-protocol.md) | [提交 Issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-zh-CN) |
+| 🇸🇦 العربية (ar-SA) | [بروتوكول MFOP v1.0](specs/ar-SA/mfop-protocol.md) | [فتح مشكلة](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-ar-SA) |
 
-→ [Full index with status and review notes](specs/README.md)
+→ [Full spec index with status and review notes](specs/README.md)
 
 ## Community
 
