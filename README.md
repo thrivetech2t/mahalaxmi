@@ -12,6 +12,7 @@ No chaos. No merge hell. Just parallel speed with a human-in-the-loop safety net
 [![Build](https://github.com/mahalaxmi-ai/mahalaxmi/actions/workflows/ci.yml/badge.svg)](https://github.com/mahalaxmi-ai/mahalaxmi/actions)
 [![Discord](https://img.shields.io/discord/bSkzhTPK?label=Discord&color=5865F2)](https://discord.gg/bSkzhTPK)
 [![Spec: Peer Review](https://img.shields.io/badge/MFOP%20Spec-Peer%20Review%20Open-yellow)](specs/README.md)
+[![BioMetrics: Patent Pending](https://img.shields.io/badge/BioMetrics-Patent%20Pending%20%E2%80%94%20Open%20for%20Comment-green)](specs/en-US/biometrics.md)
 
 > [!IMPORTANT]
 > **The MFOP v1.0 Protocol Specification is open for public peer review.**
@@ -22,6 +23,16 @@ No chaos. No merge hell. Just parallel speed with a human-in-the-loop safety net
 > | 🇯🇵 [日本語](specs/ja-JP/mfop-protocol.md) | 🇰🇷 [한국어](specs/ko-KR/mfop-protocol.md) | 🇧🇷 [Português](specs/pt-BR/mfop-protocol.md) | 🇨🇳 [中文](specs/zh-CN/mfop-protocol.md) | 🇸🇦 [العربية](specs/ar-SA/mfop-protocol.md) |
 >
 > → [**Submit feedback via GitHub Issues**](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback) · [Full spec index with status](specs/README.md)
+
+> [!NOTE]
+> **BioMetrics Patent Pending Disclosure — open for technical comment.**
+> A U.S. Provisional Patent Application was filed March 22, 2026. The full technical disclosure is published here for public record and peer review. Comments on the architecture, prior art, or technical claims are welcome via GitHub Issues.
+>
+> | 🇺🇸 [English](specs/en-US/biometrics.md) | 🇪🇸 [Español](specs/es-ES/biometrics.md) | 🇫🇷 [Français](specs/fr-FR/biometrics.md) | 🇩🇪 [Deutsch](specs/de-DE/biometrics.md) | 🇮🇳 [हिन्दी](specs/hi-IN/biometrics.md) |
+> |---|---|---|---|---|
+> | 🇯🇵 [日本語](specs/ja-JP/biometrics.md) | 🇰🇷 [한국어](specs/ko-KR/biometrics.md) | 🇧🇷 [Português](specs/pt-BR/biometrics.md) | 🇨🇳 [中文](specs/zh-CN/biometrics.md) | 🇸🇦 [العربية](specs/ar-SA/biometrics.md) |
+>
+> → [**Submit feedback via GitHub Issues**](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics) · Patent Pending © 2026 ThriveTech Services LLC
 
 ![Mahalaxmi Dashboard](docs/assets/demo.gif)
 <!-- TODO: replace with actual demo GIF before launch -->
@@ -210,6 +221,29 @@ MFOP defines how Mahalaxmi nodes federate, route jobs, sign billing receipts, an
 | 🇸🇦 العربية (ar-SA) | [بروتوكول MFOP v1.0](specs/ar-SA/mfop-protocol.md) | [فتح مشكلة](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,lang-ar-SA) |
 
 → [Full spec index with status and review notes](specs/README.md)
+
+## BioMetrics — Patent Pending Disclosure
+
+The **BioMetrics** patent disclosure describes a federated AI orchestration system with cryptographic chain-of-custody for multi-modal biometric identification workflows. A U.S. Provisional Patent Application was filed **March 22, 2026** with the USPTO. This document is published for public record and peer review.
+
+The invention introduces: a Root Federation Manager with bounded delegation depth; Manager-Worker quorum consensus producing structured identity assertions; cryptographically signed WorkUnitReceipt chain-of-custody; jurisdiction-scoped policy enforcement at the AI inference layer; and federated deduplication without cross-jurisdiction raw biometric transmission.
+
+**How to comment:** Open a [BioMetrics Feedback issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics). Reference the section number and language in your issue. Comments on the architecture, prior art distinctions, or technical claims are welcome.
+
+| Language | Read the Disclosure | Leave Feedback |
+|---|---|---|
+| 🇺🇸 English (en-US) | [BioMetrics Disclosure](specs/en-US/biometrics.md) | [Open an issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-en-US) |
+| 🇪🇸 Español (es-ES) | [Divulgación BioMetrics](specs/es-ES/biometrics.md) | [Abrir un problema](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-es-ES) |
+| 🇫🇷 Français (fr-FR) | [Divulgation BioMetrics](specs/fr-FR/biometrics.md) | [Ouvrir un ticket](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-fr-FR) |
+| 🇩🇪 Deutsch (de-DE) | [BioMetrics-Offenbarung](specs/de-DE/biometrics.md) | [Issue erstellen](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-de-DE) |
+| 🇮🇳 हिन्दी (hi-IN) | [BioMetrics प्रकटीकरण](specs/hi-IN/biometrics.md) | [समस्या खोलें](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-hi-IN) |
+| 🇯🇵 日本語 (ja-JP) | [BioMetrics 開示](specs/ja-JP/biometrics.md) | [Issue を開く](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-ja-JP) |
+| 🇰🇷 한국어 (ko-KR) | [BioMetrics 공시](specs/ko-KR/biometrics.md) | [이슈 열기](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-ko-KR) |
+| 🇧🇷 Português (pt-BR) | [Divulgação BioMetrics](specs/pt-BR/biometrics.md) | [Abrir uma issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-pt-BR) |
+| 🇨🇳 中文 (zh-CN) | [BioMetrics 披露](specs/zh-CN/biometrics.md) | [提交 Issue](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-zh-CN) |
+| 🇸🇦 العربية (ar-SA) | [إفصاح BioMetrics](specs/ar-SA/biometrics.md) | [فتح مشكلة](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-ar-SA) |
+
+Patent Pending. © 2026 ThriveTech Services LLC. All rights reserved.
 
 ## Community
 
