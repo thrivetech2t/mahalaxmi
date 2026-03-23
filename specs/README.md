@@ -31,6 +31,27 @@ Please reference the section number and language in your issue.
 
 ---
 
+## BioMetrics — Federated AI Biometric Identification (Patent Pending)
+
+This section contains the public patent disclosure for the **BioMetrics** system — a federated AI orchestration architecture for multi-modal biometric identification workflows, with cryptographic chain-of-custody and jurisdiction-scoped policy enforcement.
+
+A U.S. Provisional Patent Application was filed March 22, 2026. Comments on the technical disclosure are welcome.
+
+| Language | Document | Status | Feedback |
+|---|---|---|---|
+| English (en-US) | [BioMetrics Disclosure](en-US/biometrics.md) | 🟡 Patent Pending — Open for Comment | [Leave feedback](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-en-US) |
+| Español (es-ES) | [Divulgación BioMetrics](es-ES/biometrics.md) | 🟡 Patente Pendiente — Abierto a Comentarios | [Dejar comentarios](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-es-ES) |
+| Français (fr-FR) | [Divulgation BioMetrics](fr-FR/biometrics.md) | 🟡 Brevet en Cours — Ouvert aux Commentaires | [Laisser un commentaire](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-fr-FR) |
+| Deutsch (de-DE) | [BioMetrics-Offenbarung](de-DE/biometrics.md) | 🟡 Patent Angemeldet — Offen für Kommentare | [Feedback geben](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-de-DE) |
+| हिन्दी (hi-IN) | [BioMetrics प्रकटीकरण](hi-IN/biometrics.md) | 🟡 पेटेंट लंबित — टिप्पणियों के लिए खुला | [प्रतिक्रिया दें](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-hi-IN) |
+| 日本語 (ja-JP) | [BioMetrics 開示](ja-JP/biometrics.md) | 🟡 特許出願中 — コメント受付中 | [フィードバックを送る](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-ja-JP) |
+| 한국어 (ko-KR) | [BioMetrics 공시](ko-KR/biometrics.md) | 🟡 특허 출원 중 — 의견 환영 | [피드백 남기기](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-ko-KR) |
+| Português (pt-BR) | [Divulgação BioMetrics](pt-BR/biometrics.md) | 🟡 Patente Pendente — Aberto a Comentários | [Deixar feedback](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-pt-BR) |
+| 中文 (zh-CN) | [BioMetrics 披露](zh-CN/biometrics.md) | 🟡 专利申请中 — 欢迎评论 | [提交反馈](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-zh-CN) |
+| العربية (ar-SA) | [إفصاح BioMetrics](ar-SA/biometrics.md) | 🟡 براءة اختراع قيد الانتظار — مفتوح للتعليقات | [تقديم ملاحظات](https://github.com/mahalaxmi-ai/mahalaxmi/issues/new?template=spec-feedback.yml&labels=spec-feedback,biometrics,lang-ar-SA) |
+
+---
+
 ## Status Key
 
 | Badge | Meaning |
